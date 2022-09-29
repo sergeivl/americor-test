@@ -1,12 +1,14 @@
 <?php
 
+use yii\queue\file\Queue;
+
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log', 'queue'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -44,6 +46,10 @@ $config = [
             ],
         ],
         'db' => $db,
+        'queue' => [
+            'class' => Queue::class,
+            //'as log' => \yii\queue\LogBehavior::class,
+        ],
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,
